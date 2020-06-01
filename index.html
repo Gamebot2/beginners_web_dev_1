@@ -1,0 +1,42 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <button onclick="sendRequest()">Click Me!</button>
+    <h4 id="response"></h4>
+
+    <label for="fname">First name:</label>
+    <input type="text" id="fname" name="fname">
+    <button onclick="sendFirstName()">See what happens!</button>
+    <h2 id="greeting"></h2>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function sendRequest() {
+
+            $.ajax({
+                type: 'GET',
+                url: "/example",
+                success: function(data) {
+                    document.getElementById("response").innerHTML = data;
+                }
+            })
+
+        }
+
+        function sendFirstName() {
+            var firstName = document.getElementById("fname").value;
+            $.ajax({
+                type: 'POST',
+                url: "/name?fname=" + firstName,
+                success: function(data) {
+                    document.getElementById("greeting").innerHTML = data;
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
